@@ -1,0 +1,67 @@
+<!--
+ * @license
+ * Copyright (c) 2015 MediaMath Inc. All rights reserved.
+ * This code may only be used under the BSD style license found at http://mediamath.github.io/strand/LICENSE.txt
+
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html"/>
+<link rel="import" href="../shared/js/measure.html"/>
+<link rel="import" href="../shared/behaviors/resolvable.html"/>
+<link rel="import" href="../shared/behaviors/stylable.html"/>
+<link rel="import" href="../shared/behaviors/positionable-editor.html"/>
+<link rel="import" href="../shared/behaviors/stackable.html"/>
+<link rel="import" href="../shared/behaviors/keyboardable.html"/>
+<link rel="import" href="../shared/behaviors/refable.html"/>
+<link rel="import" href="../strand-input/strand-input.html"/>
+<link rel="import" href="../strand-dropdown/strand-dropdown.html"/>
+<link rel="import" href="../strand-datepicker/strand-datepicker.html"/>
+
+<dom-module id="strand-inline-edit">
+	<link rel="import" type="css" href="strand-inline-edit.css"/>
+	<template>
+		
+		<span id="target" on-tap="_edit">
+			<content></content>
+		</span>
+
+		<div id="panel">
+			<div id="container">
+				<template is="dom-if" if="{{_typePrimitive(type)}}">
+					<strand-input 
+						id="input"
+						layout="editor" 
+						fitparent></strand-input>
+				</template>
+				<template is="dom-if" if="{{_typeCollection(type, collection)}}">
+					<strand-dropdown 
+						id="dropdown"
+						layout="editor" 
+						fitparent></strand-dropdown>
+				</template>
+			</div>
+			<div id="buttons">
+				<div id="save" on-tap="_save">
+					<strand-icon type="check-alt" width="8" height="8"></strand-icon>
+				</div>
+				<div id="cancel" on-tap="_cancel">
+					<strand-icon type="delete" width="8" height="8"></strand-icon>
+				</div>
+			</div>
+		</div>
+
+		<!-- Date picker is a special case - as it will not live in the panel -->
+		<template is="dom-if" if="{{_showDate}}" restamp>
+			<strand-datepicker
+				id="datepicker"
+				use-timezone="false"
+				use-time="false"
+				use-range="false"
+				on-saved="_dateSaved"
+				on-close="_dateClosed"
+				dual="false"></strand-datepicker>
+		</template>
+
+	</template>
+</dom-module>
+
+<script src="strand-inline-edit.js"></script>

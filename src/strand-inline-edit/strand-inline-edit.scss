@@ -1,0 +1,76 @@
+/**
+ * @license
+ * Copyright (c) 2015 MediaMath Inc. All rights reserved.
+ * This code may only be used under the BSD style license found at http://mediamath.github.io/strand/LICENSE.txt
+
+*/
+@import "_bourbon";
+@import "_color";
+@import "_text";
+@import "_mixins";
+
+:host {
+	display: inline-block;
+	position: relative;
+	width: 100%;
+}
+
+#target {
+	@include defaultFont(12px, normal);
+	color: $color-A2;
+	display: inline-block;
+	margin: 1px 0;
+	
+	&:hover {
+		border-bottom: 1px dotted $color-A2;
+		margin-bottom: 0;
+	}
+}
+
+#panel {
+	position: fixed;
+	display: block;
+	// z-index: 1;
+}
+
+#buttons {
+	width: 46px;
+	height: 18px;
+	position: absolute;
+	display: flex;
+	right: 0;
+	top: -18px;
+	background: #333;
+	border-radius: 4px 4px 0 0;
+
+	// &[hidden] {
+	// 	display: none;
+	// }
+}
+
+#cancel,
+#save {
+	width:23px;
+	height: 18px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+
+	strand-icon {
+		pointer-events: none;
+		color: $color-F0;
+	}
+}
+
+#cancel:hover {
+	strand-icon {
+		color: $color-C2;
+	}
+}
+
+#save:hover {
+	strand-icon {
+		color: $color-B4;
+	}
+}
